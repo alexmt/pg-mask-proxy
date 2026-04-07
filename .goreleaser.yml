@@ -1,0 +1,25 @@
+version: 2
+
+builds:
+  - binary: pg-mask-proxy
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+
+brews:
+  - name: pg-mask-proxy
+    repository:
+      owner: alexmt
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: "https://github.com/alexmt/pg-mask-proxy"
+    description: "PostgreSQL proxy that masks sensitive columns in query results"
+    install: |
+      bin.install "pg-mask-proxy"
